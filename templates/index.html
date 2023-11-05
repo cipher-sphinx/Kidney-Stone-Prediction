@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{{url_for('predict')}}" method="post">
+        <input type="text" name="Urine_Gravity" placeholder="Urine_Gravity"><br><br>
+        <input type="text" name="Urine_pH" placeholder="Urine_pH"><br><br>
+        <input type="text" name="Osmolality" placeholder="Osmolality"><br><br>
+        <input type="text" name="Conductivity" placeholder="Conductivity"><br><br>
+        <input type="text" name="Urea" placeholder="Urea"><br><br>
+        <input type="text" name="Calcium" placeholder="Calcium"><br><br>
+        <button type="submit">Predict</button>
+        <h3><br><br>{{prediction_text}}</h3>
+    </form>
+</body>
+</html>
