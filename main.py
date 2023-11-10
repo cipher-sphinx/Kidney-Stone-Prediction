@@ -11,18 +11,19 @@ def index():
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
-    prediction = model.predict([[request.form.get('Urine_Gravity'), 
-                                 request.form.get('Urine_pH'), 
-                                 request.form.get('Osmolality'), 
-                                 request.form.get('Conductivity'), 
-                                 request.form.get('Urea'), 
-                                 request.form.get('Calcium')]])
-    print(prediction)
-    if prediction[0] == [1]:
-        output = 'Risk of Kidney Stones'
-    if prediction == [0]:
-        output = 'No Risk of Kidney Stones'
-    return render_template('index.html', prediction_text = f'Predicted output: {output}')
+    features = [
+        request.form.get('Urine_Gravity'),
+        request.form.get('Urine_pH'),
+        request.form.get('Osmolality'),
+        request.form.get('Conductivity'),
+        request.form.get('Urea'),
+        request.form.get('Calcium')
+    ]
+
+    prediction = model.predict([features])[0]
+    output = 'Risk of Kidney Stones' if prediction == 1 else 'No Risk of Kidney Stones'
+
+    return render_template('index.html', prediction_text=f'Predicted output: {output}')
 
 
 if __name__ == '__main__':
